@@ -15,10 +15,10 @@ jobs:
         run: eval $(minikube docker-env)
 
       - name: Build Client Image
-        run: docker build -t ibbitibbi/client ./app/client
+        run: docker build -t ibbitibbi/client ./client
 
       - name: Build Server Image
-        run: docker build -t ibbitibbi/server ./app/server
+        run: docker build -t ibbitibbi/server ./server
 
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
