@@ -1,0 +1,37 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Docker to use Minikube
+        run: eval $(minikube docker-env)
+
+      - name: Build Client Image
+        run: docker build -t ibbitibbi/client ./app/client
+
+      - name: Build Server Image
+        run: docker build -t ibbitibbi/server ./app/server
+
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push Images
+        run: |
+          docker push username/client
+          docker push username/server
+
+      - name: Deploy to Minikube
+        run: |
+          kubectl apply -f namespace.yaml
+          kubectl apply -f server-deployment.yaml
+          kubectl apply -f server-service.yaml
+          kubectl apply -f client-deployment.yaml
+          kubectl apply -f client-service.yaml

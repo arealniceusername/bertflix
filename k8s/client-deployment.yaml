@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: client
-          image: username/client:latest
+          image: ibbitibbi/client:latest
           ports:
             - containerPort: 3000

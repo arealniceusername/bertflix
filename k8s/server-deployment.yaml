@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
         - name: server
-          image: username/server:latest
+          image: ibbitibbi/server:latest
           ports:
             - containerPort: 5000
           env:
-            - name: MONGO_URI
-              value: "<your-mongodb-uri>"
+            - name: MONGODB_URL
+              value: "mongodb+srv://ibbitibbi400:test@test.xsclqhe.mongodb.net/?retryWrites=true&w=majority&appName=test"
