@@ -25,8 +25,8 @@ jobs:
 
       - name: Push Images
         run: |
-          docker push username/client
-          docker push username/server
+          docker push ibbitibbi/client
+          docker push ibbitibbi/server
 
       - name: Deploy to Minikube
         run: |
